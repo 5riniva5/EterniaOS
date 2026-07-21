@@ -1,21 +1,29 @@
-# EterniaOS ⚡ // 2026 He-man film edition 
+# EterniaOS ⚡ // 2026 He-Man Film Edition
 
-[EterniaOS](https://5riniva5.github.io/EterniaOS/) is a high-performance, web-based operating system hub that fuses a sleek unblocked arcade layout with a dark neon cyberpunk aesthetic and a fully modular utility suite.
+**EterniaOS** is a high-performance web operating system featuring a sleek window manager, dark neon glassmorphism aesthetics, an epic Grayskull boot sequence, and an arcade ecosystem built for speed and immersion.
 
-## 🚀 Key Features
+---
 
-* **Lunar UI Architecture:** Features a high-contrast top system bar paired with a clean, responsive, grid-based app launcher.
-* **Shadow Dark Theme:** Styled with deep obsidian glassmorphism backgrounds, vibrant neon accents, and smooth hover elevation effects.
-* **Interactive Grayskull Jukebox:** An embedded audio player complete with channel selection for classic theme tracks and full playback controls.
-* **Draggable Window System:** Custom-built window management allowing users to click, drag, layer, and close multiple applications on the workspace simultaneously.
-* **Modular Productivity & Entertainment Suite:**
-  * **Quest Log:** A functional task manager to track and check off daily missions.
-  * **Calculator:** Quick math utility for calculations on the fly.
-  * **Notepad:** Persistent scratchpad for jotting down notes.
-  * **Minigame & Gallery:** Interactive entertainment and media viewer.
-  * **System Monitor:** Real-time system performance and diagnostic simulation.
+## 🚀 Installed Applications & Modules
 
-## 🛠️ Built With
+* **🎵 Grayskull Jukebox (`music.js`)**: Audio player loaded with classic tracks, live volume scaling, and track switching.
+* **📋 Quest Log & Calendar (`tasks.js`)**: Interactive task manager combined with a date-based schedule planner.
+* **🧮 Scientific Calculator (`calc.js`)**: Full-featured calculator with memory registers, mathematical functions, and history tape log.
+* **📝 Notepad (`notepad.js`)**: Clean text editor with formatting tools and local text file export.
+* **🕹️ Cyberpunk Snake (`game.js`)**: Smooth canvas arcade minigame featuring neon graphics and dynamic difficulty.
+* **🖼️ Image Matrix Gallery (`gallery.js`)**: Integrated file uploader allowing users to upload, preview, and inspect their own images.
+* **📊 System Monitor (`monitor.js`)**: Live telemetry tracking CPU allocation, memory status, and secure network links.
+* **⏰ World Clock (`clock.js`)**: Multi-timezone digital clock with live analog tracking and 12/24-hour formatting.
+* **💻 OP Terminal (`terminal.js`)**: High-performance command interpreter featuring history buffers, multi-threaded simulation, and God-Mode overrides.
 
-* **Vanilla JavaScript** (Modular script architecture with dynamic DOM injection and event handling)
-* **HTML5 & CSS3** (Custom CSS variables, CSS Grid, and backdrop filters for modern glassmorphism)
+---
+
+## ⚡ God-Mode Terminal Commands
+
+Open the **Terminal** app from the desktop and try these native commands:
+* `help` — Displays all available system directives.
+* `matrix` — Toggles the high-performance visual neon grid background.
+* `overclock` — Maximizes CPU core clock limits.
+* `greyskull` — Invokes the Power of Grayskull.
+* `top` — Renders active system performance metrics.
+* `uname` — Prints current kernel build specifications.

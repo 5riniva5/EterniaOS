@@ -1,63 +1,112 @@
-function createWindow(title, contentHTML, width = '380px', height = '260px') {
-    // Remove existing window of the same title if open
-    const existing = document.getElementById(`window-${title.replace(/\s+/g, '')}`);
-    if (existing) {
-        existing.remove();
-    }
+// Global Window Manager for EterniaOS
+let zIndexCounter = 100;
 
+function createWindow(title, contentHTML, width = '360px', height = '280px') {
+    const desktop = document.getElementById('desktop') || document.body;
+    
+    // Create Window Container
     const win = document.createElement('div');
-    win.id = `window-${title.replace(/\s+/g, '')}`;
-    win.className = 'window';
-    win.style.width = width;
-    win.style.height = height;
-    win.style.top = `${Math.random() * 60 + 80}px`;
-    win.style.left = `${Math.random() * 100 + 100}px`;
-
-    win.innerHTML = `
-        <div class="window-header">
-            <span>${title}</span>
-            <button onclick="this.closest('.window').remove()">✕</button>
-        </div>
-        <div class="window-body" style="padding: 16px; flex: 1; overflow-y: auto; display: flex; flex-direction: column;">
-            ${contentHTML}
-        </div>
+    win.className = 'os-window';
+    win.style.cssText = `
+        position: absolute;
+        top: calc(50% - ${parseInt(height)/2}px + ${(Math.random() * 40 - 20)}px);
+        left: calc(50% - ${parseInt(width)/2}px + ${(Math.random() * 40 - 20)}px);
+        width: ${width};
+        height: ${height};
+        background: #0b0f19;
+        border: 1px solid var(--border-color, #38bdf8);
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: ${zIndexCounter++};
+        font-family: inherit;
     `;
 
-    document.body.appendChild(win);
-    makeDraggable(win);
-}
+    // Window Titlebar
+    const titlebar = document.createElement('div');
+    titlebar.style.cssText = `
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: rgba(56, 189, 248, 0.08);
+        border-bottom: 1px solid var(--border-color, #38bdf8);
+        cursor: move;
+        user-select: none;
+    `;
+    titlebar.innerHTML = `
+        <span style="font-weight: bold; font-size: 0.85rem; color: var(--accent, #38bdf8);">${title}</span>
+        <button class="close-btn" style="background: none; border: none; color: #ef4444; font-weight: bold; cursor: pointer; font-size: 0.9rem;">✕</button>
+    `;
 
-function makeDraggable(element) {
-    const header = element.querySelector('.window-header');
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
+    // Window Body Content Area
+    const body = document.createElement('div');
+    body.style.cssText = `
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+        color: var(--text, #f8fafc);
+        display: flex;
+        flex-direction: column;
+    `;
+    body.innerHTML = contentHTML;
 
-    header.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        initialX = element.offsetLeft;
-        initialY = element.offsetTop;
-        
-        // Bring to front
-        document.querySelectorAll('.window').forEach(w => w.style.zIndex = 500);
-        element.style.zIndex = 1000;
+    win.appendChild(titlebar);
+    win.appendChild(body);
+    desktop.appendChild(win);
 
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+    // Bring to front on click
+    win.addEventListener('mousedown', () => {
+        win.style.zIndex = zIndexCounter++;
     });
 
-    function onMouseMove(e) {
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        element.style.left = `${initialX + dx}px`;
-        element.style.top = `${initialY + dy}px`;
-    }
+    // Close button handler
+    titlebar.querySelector('.close-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        win.remove();
+    });
 
-    function onMouseUp() {
+    // Dragging Logic
+    let isDragging = false;
+    let startX, startY;
+
+    titlebar.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - win.offsetLeft;
+        startY = e.clientY - win.offsetTop;
+        win.style.zIndex = zIndexCounter++;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        win.style.left = `${e.clientX - startX}px`;
+        win.style.top = `${e.clientY - startY}px`;
+    });
+
+    window.addEventListener('mouseup', () => {
         isDragging = false;
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-    }
+    });
 }
+
+// Master App Launch Handlers
+window.launchApp = function(appName) {
+    switch(appName) {
+        case 'music': if (typeof openMusicPlayer === 'function') openMusicPlayer(); break;
+        case 'tasks': if (typeof openTaskManager === 'function') openTaskManager(); break;
+        case 'calculator': if (typeof openCalculator === 'function') openCalculator(); break;
+        case 'notepad': if (typeof openNotepad === 'function') openNotepad(); break;
+        case 'game': if (typeof openGame === 'function') openGame(); break;
+        case 'gallery': if (typeof openGallery === 'function') openGallery(); break;
+        case 'monitor': if (typeof openMonitor === 'function') openMonitor(); break;
+        case 'clock': if (typeof openClock === 'function') openClock(); break;
+        case 'terminal': if (typeof openTerminal === 'function') openTerminal(); break;
+        default: console.log('App not found:', appName);
+    }
+};
+
+// Global Boot Event Initializer
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('EterniaOS Kernel initialized successfully.');
+});

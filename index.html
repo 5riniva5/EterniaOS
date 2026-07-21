@@ -7,42 +7,60 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Top System Bar -->
-    <div class="menu-bar">
-        <div class="logo">⚡ ETERNIAOS // ARCADE HUB</div>
-        <div class="status-chip" id="system-clock">SYSTEM ONLINE</div>
+    <!-- Epic Loading Screen -->
+    <div id="loading-screen" style="position: fixed; inset: 0; background: #06080c; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease;">
+        <div id="loading-text" style="font-family: monospace; font-weight: 900; font-size: clamp(1.2rem, 3vw, 2.5rem); color: #38bdf8; text-transform: uppercase; text-align: center; text-shadow: 0 0 20px rgba(56,189,248,0.8), 0 0 40px rgba(56,189,248,0.4); letter-spacing: 2px; padding: 0 20px; z-index: 2;">
+            BY THE POWER OF GRAYSKULL... THE WEB HAS THE POWER!
+        </div>
+        
+        <!-- Animated Sword of Power -->
+        <div id="power-sword" style="position: absolute; top: -250px; width: 14px; height: 180px; background: linear-gradient(to bottom, #ffffff, #38bdf8, #22c55e); clip-path: polygon(50% 0%, 100% 20%, 75% 85%, 50% 100%, 25% 85%, 0% 20%); box-shadow: 0 0 35px #38bdf8; z-index: 3; transition: top 0.9s cubic-bezier(0.25, 1, 0.5, 1);"></div>
+
+        <!-- Screen Slices for Split Animation -->
+        <div id="slice-top" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: #06080c; border-bottom: 2px solid #38bdf8; z-index: 1; transition: transform 0.8s ease 0.9s;"></div>
+        <div id="slice-bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: #06080c; border-top: 2px solid #38bdf8; z-index: 1; transition: transform 0.8s ease 0.9s;"></div>
     </div>
 
-    <!-- Desktop Workspace & App Icons -->
-    <div class="desktop" id="desktop">
-        <div class="desktop-icon" onclick="openMusicPlayer()">
-            <span style="font-size: 1.8rem;">🎵</span>
-            <span>Jukebox</span>
-        </div>
-        <div class="desktop-icon" onclick="openTaskManager()">
-            <span style="font-size: 1.8rem;">📋</span>
-            <span>Quest Log</span>
-        </div>
-        <div class="desktop-icon" onclick="openCalculator()">
-            <span style="font-size: 1.8rem;">🧮</span>
-            <span>Calculator</span>
-        </div>
-        <div class="desktop-icon" onclick="openNotepad()">
-            <span style="font-size: 1.8rem;">📝</span>
-            <span>Notepad</span>
-        </div>
-        <div class="desktop-icon" onclick="openGame()">
-            <span style="font-size: 1.8rem;">🕹️</span>
-            <span>Minigame</span>
-        </div>
-        <div class="desktop-icon" onclick="openGallery()">
-            <span style="font-size: 1.8rem;">🖼️</span>
-            <span>Gallery</span>
-        </div>
-        <div class="desktop-icon" onclick="openMonitor()">
-            <span style="font-size: 1.8rem;">📊</span>
-            <span>Monitor</span>
-        </div>
+    <div class="lunar-container" id="desktop">
+        <main class="lunar-main" style="display: flex; flex-wrap: wrap; gap: 16px; padding: 24px; align-content: flex-start;">
+            <!-- Desktop Application Launchers -->
+            <div onclick="launchApp('music')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">🎵</span>
+                <span style="font-size: 0.75rem;">Jukebox</span>
+            </div>
+            <div onclick="launchApp('tasks')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">📋</span>
+                <span style="font-size: 0.75rem;">Quest Log</span>
+            </div>
+            <div onclick="launchApp('calculator')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">🧮</span>
+                <span style="font-size: 0.75rem;">Calculator</span>
+            </div>
+            <div onclick="launchApp('notepad')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">📝</span>
+                <span style="font-size: 0.75rem;">Notepad</span>
+            </div>
+            <div onclick="launchApp('game')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">🕹️</span>
+                <span style="font-size: 0.75rem;">Minigame</span>
+            </div>
+            <div onclick="launchApp('gallery')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">🖼️</span>
+                <span style="font-size: 0.75rem;">Gallery</span>
+            </div>
+            <div onclick="launchApp('monitor')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">📊</span>
+                <span style="font-size: 0.75rem;">Monitor</span>
+            </div>
+            <div onclick="launchApp('clock')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">⏰</span>
+                <span style="font-size: 0.75rem;">Clock</span>
+            </div>
+            <div onclick="launchApp('terminal')" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; width: 80px; text-align: center;">
+                <span style="font-size: 2.0rem;">💻</span>
+                <span style="font-size: 0.75rem;">Terminal</span>
+            </div>
+        </main>
     </div>
 
     <!-- Script Injections -->
@@ -55,5 +73,6 @@
     <script src="music.js"></script>
     <script src="notepad.js"></script>
     <script src="tasks.js"></script>
+    <script src="terminal.js"></script>
 </body>
 </html>
