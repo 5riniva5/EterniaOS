@@ -1,30 +1,21 @@
-EterniaOS ⚔️
-By the power of Grayskull, the web has the power!
+# EterniaOS ⚡ // 2026 He-man film edition 
 
-🛡️ Features
-Custom Dock: Quick access to your favorite tools.
+[EterniaOS](https://5riniva5.github.io/EterniaOS/) is a high-performance, web-based operating system hub that fuses a sleek unblocked arcade layout with a dark neon cyberpunk aesthetic and a fully modular utility suite.
 
-Draggable Windows: Move your apps around just like a real OS.
+## 🚀 Key Features
 
-Real-time Clock: Always know what time it is on Eternia.
+* **Lunar UI Architecture:** Features a high-contrast top system bar paired with a clean, responsive, grid-based app launcher.
+* **Shadow Dark Theme:** Styled with deep obsidian glassmorphism backgrounds, vibrant neon accents, and smooth hover elevation effects.
+* **Interactive Grayskull Jukebox:** An embedded audio player complete with channel selection for classic theme tracks and full playback controls.
+* **Draggable Window System:** Custom-built window management allowing users to click, drag, layer, and close multiple applications on the workspace simultaneously.
+* **Modular Productivity & Entertainment Suite:**
+  * **Quest Log:** A functional task manager to track and check off daily missions.
+  * **Calculator:** Quick math utility for calculations on the fly.
+  * **Notepad:** Persistent scratchpad for jotting down notes.
+  * **Minigame & Gallery:** Interactive entertainment and media viewer.
+  * **System Monitor:** Real-time system performance and diagnostic simulation.
 
-🎨 Theme
-EterniaOS is inspired by the legendary world of Masters of the Universe. The design aesthetic pays homage to the iconic 1980s fantasy-tech vibe, updated for the modern web.
+## 🛠️ Built With
 
-🛠️ How it's built
-EterniaOS is built using:
-
-HTML5: Structured semantic markup.
-
-CSS3: Featuring custom properties and modern glassmorphism effects.
-
-JavaScript: Custom logic for window dragging and dynamic system time.
-
-💡 Usage
-Clone this repository to your local machine or Codespaces.
-
-Open index.html in your browser.
-
-Click and drag the window header to move the EterniaOS welcome window!
-
-By the power of Grayskull, the web has the power!
+* **Vanilla JavaScript** (Modular script architecture with dynamic DOM injection and event handling)
+* **HTML5 & CSS3** (Custom CSS variables, CSS Grid, and backdrop filters for modern glassmorphism)
