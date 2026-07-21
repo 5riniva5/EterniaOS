@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- Epic Loading Screen -->
-    <div id="loading-screen" style="position: fixed; inset: 0; background: #06080c; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease;">
+    <div id="loading-screen" style="position: fixed; inset: 0; background: #06080c; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; cursor: pointer;">
         <div id="loading-text" style="font-family: monospace; font-weight: 900; font-size: clamp(1.2rem, 3vw, 2.5rem); color: #38bdf8; text-transform: uppercase; text-align: center; text-shadow: 0 0 20px rgba(56,189,248,0.8), 0 0 40px rgba(56,189,248,0.4); letter-spacing: 2px; padding: 0 20px; z-index: 2; transition: all 0.5s ease;">
             BY THE POWER OF GRAYSKULL... THE WEB HAS THE POWER!
         </div>
@@ -67,34 +67,35 @@
         </main>
     </div>
 
-    <!-- Loading Screen Automatic Controller Script -->
+    <!-- Loading Screen Automatic & Click-to-Dismiss Controller -->
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+        function dismissLoader() {
+            const sword = document.getElementById('power-sword');
+            const text = document.getElementById('loading-text');
+            const sliceTop = document.getElementById('slice-top');
+            const sliceBottom = document.getElementById('slice-bottom');
+            const loader = document.getElementById('loading-screen');
+
+            if (sword && text) {
+                sword.style.top = '120%';
+                text.style.transform = 'scale(1.1)';
+                text.style.filter = 'brightness(1.5)';
+            }
+            if (sliceTop) sliceTop.style.transform = 'translateY(-100%)';
+            if (sliceBottom) sliceBottom.style.transform = 'translateY(100%)';
+            if (text) text.style.opacity = '0';
+            if (sword) sword.style.opacity = '0';
+
             setTimeout(() => {
-                const sword = document.getElementById('power-sword');
-                const text = document.getElementById('loading-text');
-                const sliceTop = document.getElementById('slice-top');
-                const sliceBottom = document.getElementById('slice-bottom');
-                const loader = document.getElementById('loading-screen');
+                if (loader) loader.style.display = 'none';
+            }, 800);
+        }
 
-                if (sword && text) {
-                    sword.style.top = '120%';
-                    text.style.transform = 'scale(1.1)';
-                    text.style.filter = 'brightness(1.5)';
-                }
-
-                setTimeout(() => {
-                    if (sliceTop) sliceTop.style.transform = 'translateY(-100%)';
-                    if (sliceBottom) sliceBottom.style.transform = 'translateY(100%)';
-                    if (text) text.style.opacity = '0';
-                    if (sword) sword.style.opacity = '0';
-                }, 850);
-
-                setTimeout(() => {
-                    if (loader) loader.style.display = 'none';
-                }, 1700);
-            }, 600);
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(dismissLoader, 1500);
         });
+
+        document.getElementById('loading-screen').addEventListener('click', dismissLoader);
     </script>
 
     <!-- Script Injections -->
