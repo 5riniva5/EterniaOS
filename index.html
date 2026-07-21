@@ -1,53 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Castle Grayskull WebOS</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="boot-screen" id="bootScreen">
-    <div class="boot-frame">
-      <div class="boot-sword">
-        <img src="https://www.he-man.org/wp-content/uploads/2026/04/671136082_18432734080183234_8974992315151242639_n-1024x1024.jpg" alt="Sword of Power" />
-      </div>
-      <h1>By the power of Grayskull... the web has the power!</h1>
-      <div class="boot-visual"></div>
-      <div class="boot-flare"></div>
-    </div>
-  </div>
+function openMusicPlayer() {
+    const content = `
+        <div style="font-weight: bold; font-size: 1.05rem; color: var(--accent);">⚔️ Power of Grayskull Jukebox</div>
+        <select id="track-select" style="padding: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid var(--border-color); border-radius: 6px; outline: none;">
+            <option value="https://ia800903.us.archive.org/27/items/he-man-and-the-masters-of-the-universe-theme-song/He-Man%20and%20the%20Masters%20of%20the%20Universe%20Theme%20Song.mp3">He-Man Animated Series Theme</option>
+            <option value="https://ia800504.us.archive.org/11/items/masters-of-the-universe-1987-soundtrack-bill-conti/01%20-%20Main%20Title%20-%20Masters%20of%20the%20Universe.mp3">1987 Movie Main Title (Bill Conti)</option>
+        </select>
+        <audio id="heman-audio" controls style="width: 100%; margin-top: 6px;" autoplay>
+            <source id="audio-source" src="https://ia800903.us.archive.org/27/items/he-man-and-the-masters-of-the-universe-theme-song/He-Man%20and%20the%20Masters%20of%20the%20Universe%20Theme%20Song.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div style="font-size: 0.8rem; color: var(--muted); text-align: center; margin-top: auto;">"By the Power of Grayskull... You Have the Power!"</div>
+    `;
+    createWindow('Grayskull Jukebox', content, '400px', '220px');
 
-  <div class="menu-bar">
-    <div class="menu-left">
-      <div class="logo">🏰 Castle Grayskull</div>
-      <div class="menu-item">System</div>
-      <div class="menu-item">Display</div>
-      <div class="menu-item">Themes</div>
-    </div>
-    <div class="menu-right">
-      <div class="status-chip">⚡ Eternia Ready</div>
-      <div class="status-chip" id="clock">00:00 • 01 Jan</div>
-    </div>
-  </div>
-
-  <div class="desktop" id="desktopArea">
-    <div class="theme-widget" id="themeWidget">
-      <div class="widget-title">Power of Grayskull</div>
-      <p class="widget-description">Activate the lightning matrix to energize every open window and shake the webOS with mystic neon pulse.</p>
-      <button class="widget-action" id="powerButton">Unleash Lightning</button>
-    </div>
-    <div id="windowContainer"></div>
-  </div>
-
-  <div class="dock" aria-label="App Dock">
-    <button class="dock-item" data-app="devlogs" data-label="Devlogs">📜</button>
-    <button class="dock-item" data-app="notepad" data-label="Notepad">📓</button>
-    <button class="dock-item" data-app="terminal" data-label="Lore Terminal">⌨️</button>
-    <button class="dock-item" data-app="theme" data-label="Theme">⚡</button>
-  </div>
-
-  <div id="power-drop"></div>
-  <script src="app.js"></script>
-</body>
-</html>
+    setTimeout(() => {
+        const select = document.getElementById('track-select');
+        const audio = document.getElementById('heman-audio');
+        const source = document.getElementById('audio-source');
+        if (select && audio && source) {
+            select.addEventListener('change', (e) => {
+                source.src = e.target.value;
+                audio.load();
+                audio.play();
+            });
+        }
+    }, 100);
+}

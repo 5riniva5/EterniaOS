@@ -1,22 +1,30 @@
-# EterniaOS
+EterniaOS ⚔️
+By the power of Grayskull, the web has the power!
 
-A web-based Castle Grayskull-inspired WebOS demo.
+🛡️ Features
+Custom Dock: Quick access to your favorite tools.
 
-## View locally
+Draggable Windows: Move your apps around just like a real OS.
 
-Open `index.html` in your browser or use Live Server.
+Real-time Clock: Always know what time it is on Eternia.
 
-## GitHub Pages
+🎨 Theme
+EterniaOS is inspired by the legendary world of Masters of the Universe. The design aesthetic pays homage to the iconic 1980s fantasy-tech vibe, updated for the modern web.
 
-This project can be hosted on GitHub Pages from the `gh-pages` branch.
+🛠️ How it's built
+EterniaOS is built using:
 
-1. Push `main` to GitHub.
-2. GitHub Actions will build and publish the repository root to `gh-pages`.
-3. The site will be available at `https://5riniva5.github.io/EterniaOS/`.
+HTML5: Structured semantic markup.
 
-## Files
+CSS3: Featuring custom properties and modern glassmorphism effects.
 
-- `index.html` — main WebOS page
-- `styles.css` — webOS styling
-- `app.js` — window management and apps
-- `image_083ee1.jpg` — desktop wallpaper
+JavaScript: Custom logic for window dragging and dynamic system time.
+
+💡 Usage
+Clone this repository to your local machine or Codespaces.
+
+Open index.html in your browser.
+
+Click and drag the window header to move the EterniaOS welcome window!
+
+By the power of Grayskull, the web has the power!
