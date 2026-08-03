@@ -7,67 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Epic Loading Screen -->
-    <div id="loading-screen" style="position: fixed; inset: 0; background: #06080c; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; cursor: pointer;">
-        <div id="loading-text" style="font-family: monospace; font-weight: 900; font-size: clamp(1.2rem, 3vw, 2.5rem); color: #38bdf8; text-transform: uppercase; text-align: center; text-shadow: 0 0 20px rgba(56,189,248,0.8), 0 0 40px rgba(56,189,248,0.4); letter-spacing: 2px; padding: 0 20px; z-index: 2; transition: all 0.5s ease;">
-            BY THE POWER OF GRAYSKULL... THE WEB HAS THE POWER!
-        </div>
-        
-        <!-- Animated Sword of Power -->
-        <div id="power-sword" style="position: absolute; top: -250px; width: 14px; height: 180px; background: linear-gradient(to bottom, #ffffff, #38bdf8, #22c55e); clip-path: polygon(50% 0%, 100% 20%, 75% 85%, 50% 100%, 25% 85%, 0% 20%); box-shadow: 0 0 35px #38bdf8; z-index: 3; transition: top 0.9s cubic-bezier(0.25, 1, 0.5, 1);"></div>
-
-        <!-- Screen Slices for Split Animation -->
-        <div id="slice-top" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: #06080c; border-bottom: 2px solid #38bdf8; z-index: 1; transition: transform 0.8s ease 0.9s;"></div>
-        <div id="slice-bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: #06080c; border-top: 2px solid #38bdf8; z-index: 1; transition: transform 0.8s ease 0.9s;"></div>
+    <div id="loading-screen">
+        <div class="loader-burst"></div>
+        <div class="loader-burst loader-burst-alt"></div>
+        <div class="loader-burst loader-burst-small"></div>
+        <div id="loading-text">ETERNIAOS — BOOTING ARCANA</div>
+        <div id="power-sword"></div>
+        <div id="slice-top"></div>
+        <div id="slice-bottom"></div>
+        <div class="loading-grid"></div>
     </div>
 
     <div class="lunar-container" id="desktop">
-        <main class="lunar-main" style="display: flex; flex-wrap: wrap; gap: 16px; padding: 24px; align-content: flex-start;">
-            <!-- Desktop Application Launchers -->
-            <div onclick="launchApp('music')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">🎵</span>
-                <span style="font-size: 0.75rem;">Jukebox</span>
-            </div>
-            <div onclick="launchApp('tasks')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">📋</span>
-                <span style="font-size: 0.75rem;">Quest Log</span>
-            </div>
-            <div onclick="launchApp('calculator')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">🧮</span>
-                <span style="font-size: 0.75rem;">Calculator</span>
-            </div>
-            <div onclick="launchApp('notepad')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">📝</span>
-                <span style="font-size: 0.75rem;">Notepad</span>
-            </div>
-            <div onclick="launchApp('game')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">🕹️</span>
-                <span style="font-size: 0.75rem;">Minigame</span>
-            </div>
-            <div onclick="launchApp('gallery')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">🖼️</span>
-                <span style="font-size: 0.75rem;">Gallery</span>
-            </div>
-            <div onclick="launchApp('monitor')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">📊</span>
-                <span style="font-size: 0.75rem;">Monitor</span>
-            </div>
-            <div onclick="launchApp('clock')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">⏰</span>
-                <span style="font-size: 0.75rem;">Clock</span>
-            </div>
-            <div onclick="launchApp('terminal')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">💻</span>
-                <span style="font-size: 0.75rem;">Terminal</span>
-            </div>
-            <div onclick="launchApp('theme')" class="desktop-icon">
-                <span style="font-size: 2.0rem;">🎨</span>
-                <span style="font-size: 0.75rem;">Themes</span>
-            </div>
+        <main class="lunar-main">
+            <div id="desktop-grid" class="desktop-grid"></div>
         </main>
     </div>
 
-    <!-- Loading Screen Automatic & Click-to-Dismiss Controller -->
     <script>
         function dismissLoader() {
             const sword = document.getElementById('power-sword');
@@ -75,30 +31,53 @@
             const sliceTop = document.getElementById('slice-top');
             const sliceBottom = document.getElementById('slice-bottom');
             const loader = document.getElementById('loading-screen');
-
+            const bursts = document.querySelectorAll('.loader-burst');
             if (sword && text) {
-                sword.style.top = '120%';
-                text.style.transform = 'scale(1.1)';
-                text.style.filter = 'brightness(1.5)';
+                sword.style.top = '44%';
+                sword.style.opacity = '0';
+                text.style.transform = 'translateY(-8px) scale(1.02)';
+                text.style.opacity = '0';
             }
-            if (sliceTop) sliceTop.style.transform = 'translateY(-100%)';
-            if (sliceBottom) sliceBottom.style.transform = 'translateY(100%)';
-            if (text) text.style.opacity = '0';
-            if (sword) sword.style.opacity = '0';
-
-            setTimeout(() => {
-                if (loader) loader.style.display = 'none';
-            }, 800);
+            bursts.forEach((burst) => burst.classList.add('explode'));
+            if (sliceTop) sliceTop.style.transform = 'translateY(-120%)';
+            if (sliceBottom) sliceBottom.style.transform = 'translateY(120%)';
+            if (loader) {
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.remove(), 700);
+            }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(dismissLoader, 1500);
-        });
+        function runLoaderSequence() {
+            const text = document.getElementById('loading-text');
+            const sword = document.getElementById('power-sword');
+            const loader = document.getElementById('loading-screen');
+            const bursts = document.querySelectorAll('.loader-burst');
+            if (!text) return;
+            text.textContent = 'BY THE POWER OF GRAYSKULL... THE WEB HAS THE POWER!';
+            bursts.forEach((burst, index) => {
+                burst.style.animationDelay = `${index * 180}ms`;
+                burst.classList.add('pulse');
+            });
+            setTimeout(() => {
+                if (text) {
+                    text.textContent = '⚡ LIGHTNING!';
+                    text.classList.add('lightning');
+                }
+                if (sword) {
+                    sword.style.top = '48%';
+                    sword.classList.add('flash');
+                }
+                if (loader) loader.classList.add('lightning-flash');
+            }, 900);
+            setTimeout(dismissLoader, 1800);
+        }
 
-        document.getElementById('loading-screen').addEventListener('click', dismissLoader);
+        window.addEventListener('DOMContentLoaded', runLoaderSequence);
+        const loaderScreen = document.getElementById('loading-screen');
+        if (loaderScreen) loaderScreen.addEventListener('click', dismissLoader);
     </script>
 
-    <!-- Script Injections -->
+    <script src="theme.js"></script>
     <script src="app.js"></script>
     <script src="calculator.js"></script>
     <script src="clock.js"></script>
@@ -109,6 +88,20 @@
     <script src="notepad.js"></script>
     <script src="tasks.js"></script>
     <script src="terminal.js"></script>
-    <script src="theme.js"></script>
+
+    <div id="taskbar">
+        <div id="taskbar-start" onclick="launchApp('settings')">☰ Eternia</div>
+        <div id="taskbar-icons"></div>
+        <div id="taskbar-clock"></div>
+    </div>
+
+    <script>
+        if (typeof updateTaskbarClock === 'function') {
+            setInterval(updateTaskbarClock, 1000);
+            updateTaskbarClock();
+        }
+    </script>
+
+    <div id="notification-center" aria-live="polite"></div>
 </body>
 </html>
